@@ -12,7 +12,7 @@
                         @csrf
                         <div class="socialite text-center">
                             <a href="{{ url('/auth/facebook') }}" class="btn btn-facebook">Facebook <i class="fa fa-facebook"></i></a>
-                            <a href="{{ url('/auth/facebook') }}" class="btn btn-google">Google <i class="fa fa-google"></i></a>
+                            <a href="{{ url('/auth/google') }}" class="btn btn-google">Google <i class="fa fa-google"></i></a>
                         </div>
                         <label for="name">اسم المستخدم</label>
                         <input class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" type="text" name="name" placeholder="اسم المستخدم" />
