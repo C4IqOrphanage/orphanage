@@ -45,7 +45,7 @@ p{
 }
 
 .navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover{
-    
+
 }
 
 /*** body ***/
@@ -53,7 +53,7 @@ p{
 .header{
     position: relative;
     background: url("../image/header.jpg") center center no-repeat;
-    background-size: cover; 
+    background-size: cover;
     width: 100%;
     min-height: 569px;
     display: flex;
@@ -85,7 +85,7 @@ p{
 .header .overlay .content .cont{
     display: flex;
     justify-content: center;
-    
+
 }
 
 .header .overlay .content .cont h2{
@@ -309,15 +309,15 @@ p{
     .orphans .counts{
         width: 100% !important;
         margin: 0
-        
+
     }
-    
+
     .logins .container,
     .register .container{
         max-width: 900px
     }
-    
-    
+
+
 }
 
 /** end media **/
@@ -364,7 +364,7 @@ p{
 }
 
 .contact-us .contact form button{
-    
+
     padding: 10px;
     width: 140px
 }
@@ -382,3 +382,36 @@ p{
 .contact-us .contact .map .text .phone{
     direction: ltrd
 }
+/** end contact us **/
+
+/** start orphans **/
+.orphans-body{
+     margin:40px 0
+}
+
+.orphans-body .orphan{
+     box-shadow: 1px 1px 5px  #000;
+     margin: 20px 0
+}
+
+.orphans-body .orphan .image{
+     width: 100%;
+     height: 100%;
+
+}
+
+.orphans-body .orphan .image img{
+     width: 100%;
+     height: 100%
+}
+
+.orphans-body .orphan .text{
+     padding: 10px 0
+}
+
+.orphans-body .orphan .text p{
+     text-align: right;
+     padding: 0 10px;
+     color: #8b8888;
+}
+/** end orphans **/

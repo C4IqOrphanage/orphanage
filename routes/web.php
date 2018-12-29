@@ -20,3 +20,4 @@ Route::get('/home', 'HomeController@index');
 Route::get('/contact-us', 'contactController@index');
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
+Route::get('/orphans', 'orphansController@index');

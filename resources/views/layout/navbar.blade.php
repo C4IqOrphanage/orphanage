@@ -12,16 +12,16 @@
       <li class="nav-item">
         <a class="nav-link" href="#">من نحن</a>
       </li>
-        
+
       <li class="nav-item">
-        <a class="nav-link" href="#">الايتام</a>
+        <a class="nav-link" href="/orphans">الايتام</a>
       </li>
-        
+
       <li class="nav-item">
         <a class="nav-link" href="/contact-us">تواصل معنا</a>
       </li>
     </ul>
-    
+
     <ul class="navbar-nav" >
         @guest
             <li><a class="nav-link bt" href="{{ route('register') }}">تسجيل</a></li>
