@@ -11,13 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'HomeController@index');
 Auth::routes();
+
+Route::middleware('auth')->group(function() {
+     Route::get('/myorphans', 'myorphanController@index');
+     Route::post('/myorphans/{orphan}/{user}', 'myorphanController@story');
+     Route::post('/myorphans/{id}', 'myorphanController@destroy');
+
+     Route::resource('/orphans', 'orphansController');
+});
+
 
 Route::get('/home', 'HomeController@index');
 Route::get('/contact-us', 'contactController@index');
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 Route::get('/orphans', 'orphansController@index');
+Route::post('/send', 'mailController@send');

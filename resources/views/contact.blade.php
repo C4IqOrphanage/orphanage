@@ -3,12 +3,13 @@
 @section('content')
 <link href="{{asset('css/navbar.css')}}" rel="stylesheet" type="text/css">
 <div class="contact-us">
-    <div class="container">
+    <div class="container ">
         <div class="contact">
             <h2 class="text-center">تواصل معنا </h2>
             <div class="row">
                 <div class="col-md-6">
-                    <form method="post" action="#">
+                    <form method="post" action="/send">
+                         {{ csrf_field() }}
                         <input class="f-contact form-control" type="text" name="name" placeholder="اسمك الكامل" />
                         <input class="f-contact form-control" type="email" name="email" placeholder="البريد الالكتروني" />
                         <textarea class="form-control" name="msg"></textarea>
@@ -35,7 +36,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>

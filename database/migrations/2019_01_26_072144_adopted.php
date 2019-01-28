@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Orphans extends Migration
+class Adopted extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,12 @@ class Orphans extends Migration
      */
     public function up()
     {
-        Schema::create('orphans', function (Blueprint $table) {
+         Schema::create('adopted', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('age');
-            $table->integer('id_number');
-            $table->string('governorate');
-            $table->string('hobbies');
-            $table->string('case');
-            $table->string('image');
-            $table->integer('adopted');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('orphan_id')->unsigned();
+            $table->foreign('orphan_id')->references('id')->on('orphans')->onDelete('cascade');
             $table->timestamps();
         });
     }

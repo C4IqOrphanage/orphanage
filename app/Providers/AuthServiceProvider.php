@@ -24,6 +24,13 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+        Gate::define('kind', function ($corp) {
+            if($corp->kind == 1){
+                return true;
+            }
+            return false;
+
+        });
 
         //
     }
