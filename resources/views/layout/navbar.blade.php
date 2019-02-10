@@ -6,22 +6,23 @@
 
   <div class="collapse navbar-collapse" id="rf">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">الرئيسية <span class="sr-only">(current)</span></a>
+      <li class="nav-item active lines">
+        <a class="nav-link line" href="/">الرئيسية <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">من نحن</a>
+      <li class="nav-item lines">
+        <a class="nav-link line" href="#">من نحن</a>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="/orphans">الايتام</a>
+      <li class="nav-item lines">
+        <a class="nav-link line" href="/orphans">الايتام</a>
       </li>
 
      @cannot('kind', Auth::user())
-           <li class="nav-item">
-            <a class="nav-link" href="/contact-us">تواصل معنا</a>
+           <li class="nav-item lines">
+              <a class="nav-link line" href="/contact-us">تواصل معنا</a>
            </li>
      @endcannot
+
 
 
     </ul>

@@ -12,50 +12,59 @@
         <div class="row">
              @foreach ($orphans as $orphan)
                @if(count($orphan) > 0)
-                  <div class="col-lg-3 col-md-4 col-sm-6">
-                     <div class="orphan">
-                         <div class="image">
-                             <img class="img" src="{{asset('image')}}/{{$orphan->image}}" />
-                         </div>
-                         <div class="text">
-                             <h3 class="text-center name">{{$orphan->name}}</h3>
-                             <h5 class="text-center age">{{$orphan->age}}</h5>
-                             <p class="hidden id">{{$orphan->id_number}}</p>
-                             <p class="hidden governorate">{{$orphan->governorate}}</p>
-                             <p class="hidden hobbies">{{$orphan->hobbies}}</p>
-                             <p class="hidden case">{{$orphan->case}}</p>
-                              @if (!Auth::guest())
-                                   @cannot('kind', Auth::user())
-                                        @if ($counts == 0)
-                                             {!! Form::open(['action' => ['myorphanController@story', $orphan->id, Auth()->user()->id], 'method' => 'POST']) !!}
-                                                  {{Form::submit('اضافة الى ايتامي', ['class'=>'btn btn-primary  pull-right'])}}
+
+                       <div class="col-lg-3 col-md-4 col-sm-6">
+                          <div class="orphan">
+                              <div class="image">
+                                  <img class="img" src="{{asset('image')}}/{{$orphan->image}}" />
+                              </div>
+                              <div class="text">
+                                  <h3 class="text-center name">{{$orphan->name}}</h3>
+                                  <h5 class="text-center age">{{$orphan->age}}</h5>
+                                  <p class="hidden id">{{$orphan->id_number}}</p>
+                                  <p class="hidden governorate">{{$orphan->governorate}}</p>
+                                  <p class="hidden hobbies">{{$orphan->hobbies}}</p>
+                                  <p class="hidden case">{{$orphan->case}}</p>
+                                   @if (!Auth::guest())
+                                        @cannot('kind', Auth::user())
+                                             @if ($counts == 0)
+                                                  {!! Form::open(['action' => ['myorphanController@story', $orphan->id, Auth()->user()->id], 'method' => 'POST']) !!}
+                                                       {{Form::submit('اضافة الى ايتامي', ['class'=>'btn btn-primary  pull-right'])}}
+                                                  {!! Form::close() !!}
+                                             @endif
+
+
+                                             @foreach($myorphans as $myorphan)
+
+                                                       @if(auth()->user()->id == $myorphan->user_id && $orphan->id !== $myorphan->orphan_id || auth()->user()->id !== $myorphan->user_id && $orphan->id == $myorphan->orphan_id || $orphan->id !== $myorphan->orphan_id)
+                                                            {!! Form::open(['action' => ['myorphanController@story', $orphan->id, Auth()->user()->id], 'method' => 'POST']) !!}
+                                                                 {{Form::submit('اضافة الى ايتامي', ['class'=>'btn btn-primary  pull-right'])}}
+                                                            {!! Form::close() !!}
+                                                       @endif
+                                             @endforeach
+                                        @endcannot
+
+
+                                        @can('kind', Auth::user())
+                                             {!! Form::open(['action' => ['orphansController@destroy', $orphan->id], 'method' => 'DELETE']) !!}
+                                                  {{Form::submit('حذف', ['class'=>'btn btn-danger  pull-right b-font'])}}
                                              {!! Form::close() !!}
-                                        @endif
 
-
-                                        @foreach($myorphans as $myorphan)
-
-                                                  @if(auth()->user()->id == $myorphan->user_id && $orphan->id !== $myorphan->orphan_id)
-                                                       {!! Form::open(['action' => ['myorphanController@story', $orphan->id, Auth()->user()->id], 'method' => 'POST']) !!}
-                                                            {{Form::submit('اضافة الى ايتامي', ['class'=>'btn btn-primary  pull-right'])}}
+                                             @foreach($adopteds as $adopted)
+                                                  @if($orphan->id !== $adopted->orphan_id)
+                                                       {!! Form::open(['action' => ['adoptedController@story', $orphan->id], 'method' => 'POST', 'class' => 'adopted']) !!}
+                                                            {{Form::submit('تبني', ['class'=>'btn btn-primary  pull-right b-font'])}}
                                                        {!! Form::close() !!}
                                                   @endif
-                                        @endforeach
-                                   @endcannot
+                                             @endforeach
 
-
-                                   @can('kind', Auth::user())
-                                        {!! Form::open(['action' => ['orphansController@destroy', $orphan->id], 'method' => 'DELETE']) !!}
-                                             {{Form::submit('حذف', ['class'=>'btn btn-danger  pull-right'])}}
-                                        {!! Form::close() !!}
-
-                                        <a class="btn btn-success pull-right" href="http://localhost:8000/orphans/{{$orphan->id}}/edit">تعديل</a>
-                                   @endcan
-                              @endif
-                             <button class="btn btn-success more">المزيد</button>
-                         </div>
-                     </div>
-                  </div>
+                                             <a class="btn btn-success b-font" href="http://localhost:8000/orphans/{{$orphan->id}}/edit">تعديل</a>
+                                        @endcan
+                                   @endif
+                                  <button class="btn btn-success more b-font">المزيد</button>
+                              </div>
+                          </div>
+                       </div>
 
                   @else
                     <h2 class="text-center">لايوجد ايتام</h2>

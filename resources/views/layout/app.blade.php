@@ -8,7 +8,7 @@
         <title>orphans</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet" type="text/css">
         <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/droid-arabic-naskh" type="text/css"/>
         <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
         <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
@@ -23,7 +23,7 @@
     <body>
         @include('layout.navbar')
         @yield('content')
-        
+
 
     </body>
 </html>

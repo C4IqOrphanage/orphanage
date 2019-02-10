@@ -64,3 +64,32 @@ return [
     'log_channel' => env('MAIL_LOG_CHANNEL'),
 
 ];
+
+
+
+    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+
+
+    'username' => env('MAIL_USERNAME'),
+
+    'password' => env('MAIL_PASSWORD'),
+
+
+
+    'sendmail' => '/usr/sbin/sendmail -bs',
+
+
+
+    'markdown' => [
+        'theme' => 'default',
+
+        'paths' => [
+            resource_path('views/vendor/mail'),
+        ],
+    ],
+
+
+
+    'log_channel' => env('MAIL_LOG_CHANNEL'),
+
+];

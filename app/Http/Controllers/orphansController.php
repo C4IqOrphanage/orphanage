@@ -7,6 +7,7 @@ use App\Orphans;
 use Image;
 use App\User;
 use App\Myorphan;
+use App\Adopted;
 use Gate;
 use Auth;
 class orphansController extends Controller
@@ -20,60 +21,71 @@ class orphansController extends Controller
     }
     //
     public function index(){
-
         $orphans = Orphans::orderBy('created_at' , 'desc')->paginate(3);
-        $user = User::all('id');
         $myorphans = Myorphan::all();
         $counts = Myorphan::all('id')->count();
-        return view('orphans')->with(array('orphans' => $orphans, 'user' => $user, 'myorphans' => $myorphans, 'counts' => $counts));
+        $adopteds = Adopted::get();
+        return view('orphans')->with(array('orphans' => $orphans, 'myorphans' => $myorphans, 'counts' => $counts, 'adopteds' => $adopteds));
     }
 
      public function edit($id)
      {
-          $orphans = Orphans::find($id);
-          return view('/edit')->with('orphans', $orphans);
+          if (Gate::allows('kind', Auth::user())){
+               $orphans = Orphans::find($id);
+               return view('/edit')->with('orphans', $orphans);
+          }else {
+               return redirect('/home')->with('error', 'can not open this.');
+          }
      }
 
      public function update(Request $request, $id)
      {
-          $this->Validate($request , [
-               'name'         => 'required',
-               'age'          => 'required',
-               'id_number'    => 'required',
-               'governorate'  => 'required',
-               'hobbies'      => 'required',
-               'case'         => 'required',
-               'image'        => 'required|nullable|max:500000'
-          ]);
+          if (Gate::allows('kind', Auth::user())){
+               $this->Validate($request , [
+                    'name'         => 'required',
+                    'age'          => 'required',
+                    'id_number'    => 'required',
+                    'governorate'  => 'required',
+                    'hobbies'      => 'required',
+                    'case'         => 'required',
+                    'image'        => 'max:500000'
+               ]);
 
-          if($request->hasFile('image')){
-             $fileNameExt = $request->file('image')->getClientOriginalName();
-             $fileName = pathinfo($fileNameExt, PATHINFO_FILENAME);
-             $extention = $request->file('image')->getClientOriginalExtension();
+               if($request->hasFile('image')){
+                  $fileNameExt = $request->file('image')->getClientOriginalName();
+                  $fileName = pathinfo($fileNameExt, PATHINFO_FILENAME);
+                  $extention = $request->file('image')->getClientOriginalExtension();
 
-             $fileNameStore =  time() . '.' . $extention;
-             $path =  $request->file('image')->move(base_path() . '/public/image/', $fileNameStore);
-          }else{
-             $fileNameStore = 'header.jpg';
+                  $fileNameStore =  time() . '.' . $extention;
+                  $path =  $request->file('image')->move(base_path() . '/public/image/', $fileNameStore);
+               }else{
+                  $fileNameStore = 'header.jpg';
+               }
+
+               $orphan = Orphans::find($id);
+               $orphan->name = $request->input('name');
+               $orphan->age = $request->input('age');
+               $orphan->id_number = $request->input('id_number');
+               $orphan->governorate = $request->input('governorate');
+               $orphan->hobbies = $request->input('hobbies');
+               $orphan->case = $request->input('case');
+               $orphan->image = $fileNameStore;
+               $orphan->save();
+               return redirect('/orphans')->with('success', 'Done successfuly');
+          }else {
+               return redirect('/home')->with('error', 'can not open this.');
           }
-
-          $orphan = Orphans::find($id);
-          $orphan->name = $request->input('name');
-          $orphan->age = $request->input('age');
-          $orphan->id_number = $request->input('id_number');
-          $orphan->governorate = $request->input('governorate');
-          $orphan->hobbies = $request->input('hobbies');
-          $orphan->case = $request->input('case');
-          $orphan->image = $fileNameStore;
-          $orphan->save();
-          return redirect('/orphans')->with('success', 'Done successfuly');
 
      }
 
 
      public function create()
      {
-          return view('/create');
+          if (Gate::allows('kind', Auth::user())){
+               return view('/create');
+          }else {
+               return redirect('/home')->with('error', 'can not open this.');
+          }
      }
 
      public function store(Request $request)
@@ -118,11 +130,15 @@ class orphansController extends Controller
 
      public function destroy($id)
      {
-          $orphan = Orphans::find($id);
-          if($orphan->image){
-             unlink(public_path() . '\image\\' . $orphan->image);
+          if (Gate::allows('kind', Auth::user())){
+               $orphan = Orphans::find($id);
+               if($orphan->image){
+                  unlink(public_path() . '\image\\' . $orphan->image);
+               }
+               $orphan->delete();
+               return redirect('/orphans')->with('success', 'Done successfuly');
+          }else {
+               return redirect('/home')->with('error', 'can not open this.');
           }
-          $orphan->delete();
-          return redirect('/orphans')->with('success', 'Done successfuly');
      }
 }

@@ -1,5 +1,5 @@
 body{
-    font-family: droid-arabic-naskh
+    font-family: Cairo
 }
 
 p{
@@ -23,12 +23,16 @@ p{
     padding: 0 5px
 }
 
+.navbar-light .navbar-nav .nav-item span{
+     display: none;
+}
+
 .bt{
-    background-color: #222121;
+    background-color: #817a7a;
     color: #fff !important;
     margin: 0 8px;
     padding: 5px;
-    border-radius: 20px;
+    border-radius: 9px;
     transition: .5s;
     -webkit-transition: .5s;
     -moz-transition: .5s;
@@ -181,6 +185,14 @@ p{
 .orphans p{
     font-size: 20px;
     font-weight: bold
+}
+
+.b-font{
+     font-size: 14px !important
+}
+
+.adopted input{
+     margin-right: 1px !important
 }
 /** end orphans **/
 
@@ -394,7 +406,7 @@ p{
 
 .orphans-body .orphan{
      box-shadow: 1px 1px 5px  #000;
-     margin: 20px 0
+     margin: 40px 0
 }
 
 .orphans-body .orphan .image{

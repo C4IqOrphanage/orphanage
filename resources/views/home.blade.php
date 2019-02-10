@@ -94,7 +94,7 @@
                 </div>
                 <div class="col-4">
                     <h6>عدد الايتام المتبني</h6>
-                    <p>25</p>
+                    <p>{{count($adoptedCount)}}</p>
                 </div>
             </div>
         </div>

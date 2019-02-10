@@ -18,8 +18,8 @@ Route::middleware('auth')->group(function() {
      Route::get('/myorphans', 'myorphanController@index');
      Route::post('/myorphans/{orphan}/{user}', 'myorphanController@story');
      Route::post('/myorphans/{id}', 'myorphanController@destroy');
-
      Route::resource('/orphans', 'orphansController');
+     Route::post('/adopted/{id}', 'adoptedController@story');
 });
 
 
@@ -28,4 +28,4 @@ Route::get('/contact-us', 'contactController@index');
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 Route::get('/orphans', 'orphansController@index');
-Route::post('/send', 'mailController@send');
+Route::post('/callus', 'PagesController@postCallus');

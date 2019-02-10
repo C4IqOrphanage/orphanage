@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Orphans;
 use App\Myorphan;
+use App\Adopted;
 class HomeController extends Controller
 {
     /**
@@ -14,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        
+
     }
 
     /**
@@ -28,6 +29,8 @@ class HomeController extends Controller
 
         $helpCount = Myorphan::all('id');
 
-        return view('home')->with(array('orphanCount' => $orphanCount, 'helpCount' => $helpCount));
+        $adoptedCount = Adopted::all('id');
+
+        return view('home')->with(array('orphanCount' => $orphanCount, 'helpCount' => $helpCount, 'adoptedCount' => $adoptedCount));
     }
 }

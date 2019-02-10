@@ -8,12 +8,13 @@
             <h2 class="text-center">تواصل معنا </h2>
             <div class="row">
                 <div class="col-md-6">
-                    <form method="post" action="/send">
+                    <form action="{{url('/callus')}}" method="POST" >
                          {{ csrf_field() }}
-                        <input class="f-contact form-control" type="text" name="name" placeholder="اسمك الكامل" />
-                        <input class="f-contact form-control" type="email" name="email" placeholder="البريد الالكتروني" />
-                        <textarea class="form-control" name="msg"></textarea>
-                        <button type="submit" class="btn btn-success">ارسال رسالة</button>
+                         <input class="f-contact form-control" type="text" name="subject" id="subject" placeholder=" الموضوع" />
+                        <input class="f-contact form-control" type="text" name="name" id="name" placeholder="اسمك الكامل" />
+                        <input class="f-contact form-control" id="email" name="email" type="email" placeholder="البريد الالكتروني" />
+                        <textarea class="form-control" id="message" name="message"></textarea>
+                        <input type="submit" class="btn btn-success" value="ارسال رسالة"/>
                     </form>
                 </div>
                 <div class="col-md-6">

@@ -37,7 +37,7 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    
+
 
     public function redirectToProvider($provider)
     {
@@ -47,7 +47,7 @@ class LoginController extends Controller
 
     public function handleProviderCallback($provider)
     {
-        $user = Socialite::driver($provider)->user();
+        $user = Socialite::driver($provider)->stateless()->user();
 
         $authUser = $this->findOrCreateUser($user, $provider);
         Auth::login($authUser, true);
@@ -66,6 +66,6 @@ class LoginController extends Controller
             'email'    => $user->email,
             'provider' => $provider,
             'provider_id' => $user->id
-        ]); 
+        ]);
     }
 }

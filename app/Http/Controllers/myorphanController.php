@@ -26,9 +26,9 @@ class myorphanController extends Controller
 
     }
 
-    public function story(Request $request, $id, $user)
+    public function story(Request $request, $orphan, $user)
     {
-         $data['orphan_id'] = $id;
+         $data['orphan_id'] = $orphan;
          $data['user_id'] = $user;
          $myorphan = Myorphan::create($data);
          return redirect('/myorphans')->with('success', 'Done successfuly');

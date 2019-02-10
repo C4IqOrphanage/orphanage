@@ -28,10 +28,8 @@
                                              </div>
                                          </div>
                                       </div>
-                               @else
-                                      <h2 class="text-center">لايوجد ايتام</h2>
-                               @endif
-                         @endif
+                                @endif
+                          @endif
                      @endforeach
               @endforeach
 
