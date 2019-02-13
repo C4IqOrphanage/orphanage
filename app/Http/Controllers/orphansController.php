@@ -24,8 +24,9 @@ class orphansController extends Controller
         $orphans = Orphans::orderBy('created_at' , 'desc')->paginate(3);
         $myorphans = Myorphan::all();
         $counts = Myorphan::all('id')->count();
-        $adopteds = Adopted::get();
-        return view('orphans')->with(array('orphans' => $orphans, 'myorphans' => $myorphans, 'counts' => $counts, 'adopteds' => $adopteds));
+        $adopteds = Adopted::all('orphan_id');
+        $c_adopted = Adopted::all('orphan_id')->count();
+        return view('orphans')->with(array('orphans' => $orphans, 'myorphans' => $myorphans, 'counts' => $counts, 'adopteds' => $adopteds, 'c_adopted' => $c_adopted));
     }
 
      public function edit($id)

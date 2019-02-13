@@ -6,11 +6,12 @@ use Illuminate\Http\Request;
 use Gate;
 use Auth;
 use App\Adopted;
+use App\Myorphan;
 use App\Orphans;
 class adoptedController extends Controller
 {
 
-    public function story( $id)
+    public function story($id)
     {
          $data['orphan_id'] = $id;
          $myorphan = Adopted::create($data);

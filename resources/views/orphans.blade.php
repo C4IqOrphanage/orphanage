@@ -50,6 +50,12 @@
                                                   {{Form::submit('حذف', ['class'=>'btn btn-danger  pull-right b-font'])}}
                                              {!! Form::close() !!}
 
+                                             @if($c_adopted == 0)
+                                                  {!! Form::open(['action' => ['adoptedController@story', $orphan->id], 'method' => 'POST', 'class' => 'adopted']) !!}
+                                                       {{Form::submit('تبني', ['class'=>'btn btn-primary  pull-right b-font'])}}
+                                                  {!! Form::close() !!}
+                                             @endif
+
                                              @foreach($adopteds as $adopted)
                                                   @if($orphan->id !== $adopted->orphan_id)
                                                        {!! Form::open(['action' => ['adoptedController@story', $orphan->id], 'method' => 'POST', 'class' => 'adopted']) !!}

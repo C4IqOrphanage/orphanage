@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Myorphan;
 use App\Orphans;
 use App\User;
+use App\adopted;
 use Gate;
 use Auth;
 class myorphanController extends Controller
@@ -15,7 +16,10 @@ class myorphanController extends Controller
     public function index()
     {
          if (Gate::denies('kind', Auth::user())) {
-              $myorphans = Myorphan::all()->where('user_id', auth()->user()->id);
+
+              $adopted = Adopted::all('orphan_id');
+
+              $myorphans = Myorphan::all()->where('user_id', auth()->user()->id, 'orphan_id', '!=', $adopted);
 
               $orphans = Orphans::all();
 
