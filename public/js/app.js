@@ -2,18 +2,6 @@
 
 $(function(){
 
-     // add item span after nav-link
-     $('.navbar-nav .lines').append('<span class="border"></span>');
-     // make animate on link fot navbar
-     $('.navbar-nav .lines .line').hover(function () {
-          $(this).next().animate({
-               width: '100%'
-          }, 200);
-     }, function () {
-          $(this).next().animate({
-               width: 0
-          }, 200).css('display', 'none');
-     });
 
     $(window).scroll(function () {
       //console.log($(this).scrollTop() + 20);
@@ -30,7 +18,6 @@ $(function(){
          $('.orphans-body .info').animate({
               top: '15%'
          }, 2000);
-         console.log($('.orphan .image img').attr('src'));
          $('.info img').attr('src', $('.orphan .image img').attr('src'));
          $('.info .show-name').text($(this).parent().children('.name').text());
          $('.info .show-age').text('المواليد : ' + $(this).parent().children('.age').text());
@@ -42,7 +29,7 @@ $(function(){
 
     $('.orphans-body .closes').click(function () {
          $('.orphans-body .info').animate({
-              top: '-600'
+              top: '-900'
          }, 2000);
     });
 

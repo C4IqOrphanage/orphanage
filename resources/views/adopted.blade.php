@@ -5,33 +5,29 @@
 <div class="orphans-body">
     <div class="container">
         <div class="row">
-             @foreach ($myorphans as $myorphan)
-                  @foreach ($orphans as $orphan)
-                         @if($myorphan->orphan_id == $orphan->id)
-                              @if(count($myorphan->user_id == auth()->user()->id) > 0)
-                                      <div class="col-lg-3 col-md-4 col-sm-6">
-                                         <div class="orphan">
-                                             <div class="image">
-                                                 <img class="img" src="{{asset('image')}}/{{$orphan->image}}" />
-                                             </div>
-                                             <div class="text">
-                                                 <h3 class="text-center name">{{$orphan->name}}</h3>
-                                                 <h5 class="text-center age">{{$orphan->age}}</h5>
-                                                 <p class="hidden id">{{$orphan->id_number}}</p>
-                                                 <p class="hidden governorate">{{$orphan->governorate}}</p>
-                                                 <p class="hidden hobbies">{{$orphan->hobbies}}</p>
-                                                 <p class="hidden case">{{$orphan->case}}</p>
-                                                 <button class="btn btn-success more">المزيد</button>
-                                             </div>
-                                         </div>
-                                      </div>
-                               @else
-                                      <h2 class="text-center">لايوجد ايتام</h2>
-                               @endif
-                         @endif
-                     @endforeach
-              @endforeach
-
+             @can('kind', Auth::user())
+                  @foreach ($a_orphans as $orphan)
+                      @foreach($adopteds as $adopted)
+                         @if($adopted->orphan_id == $orphan->id)
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                               <div class="orphan">
+                                   <div class="image">
+                                       <img class="img" src="{{asset('image')}}/{{$orphan->image}}" />
+                                   </div>
+                                   <div class="text">
+                                       <h3 class="text-center name">{{$orphan->name}}</h3>
+                                       <h5 class="text-center age">{{$orphan->age}}</h5>
+                                       <p class="hidden id">{{$orphan->id_number}}</p>
+                                       <p class="hidden governorate">{{$orphan->governorate}}</p>
+                                       <p class="hidden hobbies">{{$orphan->hobbies}}</p>
+                                       <p class="hidden case">{{$orphan->case}}</p>
+                                       <button class="btn btn-success more">المزيد</button>
+                                   </div>
+                               </div>
+                          @endif
+                       @endforeach
+                  @endforeach
+               @endcan
         </div>
 
         <!-- more information -->
@@ -54,20 +50,4 @@
     </div>
 </div>
 
-<!-- start footer -->
-<div class="footer text-center">
-    <div class="container">
-        <div class="row">
-            <div class="col-5">
-                <a href="#"><i class="fa fa-linkedin"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-facebook-f"></i></a>
-            </div>
-            <div class="col-7">
-                <p>جميع الحقوق &copy; محفوظة لدار الايتام</p>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end footer -->
 @endsection

@@ -19,6 +19,7 @@ Route::middleware('auth')->group(function() {
      Route::post('/myorphans/{orphan}/{user}', 'myorphanController@story');
      Route::post('/myorphans/{id}', 'myorphanController@destroy');
      Route::resource('/orphans', 'orphansController');
+     Route::get('/adopted', 'adoptedController@index');
      Route::post('/adopted/{id}', 'adoptedController@story');
 });
 

@@ -26,7 +26,7 @@ class PagesController extends Controller
 
       Mail::send('email.callus', $data, function($message) use ($data){
           $message->from($data ['email']);
-          $message->to('issa.sofer@gmail.com');
+          $message->to('email@example.com');
           $message->subject($data ['subject']);
       });
       Session::flash('success', 'تم أرسال رسالتك بنجاح !. سوف نقوم بالرد قريبا ');

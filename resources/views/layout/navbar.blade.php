@@ -5,27 +5,32 @@
   </button>
 
   <div class="collapse navbar-collapse" id="rf">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item active lines">
-        <a class="nav-link line" href="/">الرئيسية <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item lines">
-        <a class="nav-link line" href="#">من نحن</a>
-      </li>
-
-      <li class="nav-item lines">
-        <a class="nav-link line" href="/orphans">الايتام</a>
-      </li>
-
-     @cannot('kind', Auth::user())
-           <li class="nav-item lines">
-              <a class="nav-link line" href="/contact-us">تواصل معنا</a>
+      <ul class="navbar-nav ml-auto">
+           <li class="nav-item active lines">
+             <a class="nav-link line" href="/">الرئيسية <span class="sr-only">(current)</span></a>
            </li>
-     @endcannot
+           <li class="nav-item lines">
+             <a class="nav-link line" href="#">من نحن</a>
+           </li>
+
+           <li class="nav-item lines">
+             <a class="nav-link line" href="/orphans">الايتام</a>
+           </li>
+
+           @cannot('kind', Auth::user())
+                <li class="nav-item lines">
+                   <a class="nav-link line" href="/contact-us">تواصل معنا</a>
+                </li>
+           @endcannot
+
+           @can('kind', Auth::user())
+                <li class="nav-item lines">
+                   <a class="nav-link line" href="/adopted">الايتام المتبنيين</a>
+                </li>
+           @endcan
 
 
-
-    </ul>
+      </ul>
 
     <ul class="navbar-nav" >
         @guest
